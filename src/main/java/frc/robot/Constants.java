@@ -22,8 +22,8 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 public final class Constants 
 {
   //Add in correct values
-  public static final int kFrontPickupID = 0;
-  public static final int kRearPickupID = 0;
+  public static final int kFrontPickupID = 14;
+  public static final int kRearPickupID = 15;
   public static final int kPieceDetector = 0;
   public static final int kPneumaticsModule = 0;
   //
