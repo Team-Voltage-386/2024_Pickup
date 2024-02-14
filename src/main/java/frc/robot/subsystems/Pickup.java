@@ -60,30 +60,31 @@ public class Pickup extends SubsystemBase {
         m_rearPickup = new CANSparkMax(Constants.kRearPickupID, MotorType.kBrushless);
 
         //Instanciates the loader motor
-        loaderMotor = new TalonSRX(Constants.kLoaderMotorID);
+        // loaderMotor = new TalonSRX(Constants.kLoaderMotorID);
 
         //Remove true to uninvert follower motor
+        m_frontPickup.setInverted(true);
         m_rearPickup.follow(m_frontPickup, true);
         
         //Instanciates the piece detectors
-        loadedPieceDetector = new DigitalInput(Constants.kLoadedPieceDetectorChannel);
-        secondaryPieceDetector = new DigitalInput(Constants.kSecondaryPieceDetectorChannel);
+        //loadedPieceDetector = new DigitalInput(Constants.kLoadedPieceDetectorChannel);
+        //secondaryPieceDetector = new DigitalInput(Constants.kSecondaryPieceDetectorChannel);
 
         PickupTab = Shuffleboard.getTab("Pickup");
 
         tempHoldingPieceTF = PickupTab.add("Holding Piece Sensor", false);
 
         //Instanciates the pickup pneumatics and retracts the pickups into the frame
-        IntakePneumatics = new DoubleSolenoid(Constants.kPneumaticsModule, PneumaticsModuleType.CTREPCM, 0, 0);
-        IntakePneumatics.set(Value.kReverse);
+        //IntakePneumatics = new DoubleSolenoid(Constants.kPneumaticsModule, PneumaticsModuleType.CTREPCM, 0, 0);
+        //IntakePneumatics.set(Value.kReverse);
 
         //Instanciates the load pneumatics and puts it in pickup mode
-        LoadPneumatics = new DoubleSolenoid(Constants.kPneumaticsModule, PneumaticsModuleType.CTREPCM, 0, 0);
-        LoadPneumatics.set(Value.kReverse);
+        //LoadPneumatics = new DoubleSolenoid(Constants.kPneumaticsModule, PneumaticsModuleType.CTREPCM, 0, 0);
+        //LoadPneumatics.set(Value.kReverse);
 
         //Instanciates the latch pneumatics and retracts it in to unlcoked mode
-        LatchPneumatics = new DoubleSolenoid(Constants.kPneumaticsModule, PneumaticsModuleType.CTREPCM, 0, 0);
-        LatchPneumatics.set(Value.kReverse);
+        //LatchPneumatics = new DoubleSolenoid(Constants.kPneumaticsModule, PneumaticsModuleType.CTREPCM, 0, 0);
+        //LatchPneumatics.set(Value.kReverse);
 
         //Starts off with no piece (will automaitically change if it sees a piece is loaded)
         noteState = subsystemsStates.noPiece;
@@ -154,31 +155,33 @@ public class Pickup extends SubsystemBase {
         //Swap to this later "if (noteState==subsystemsStates.noPiece && (!loadedPieceDetector.get() || !secondaryPieceDetector.get()))""
         if (tempHoldingPieceTF.getEntry().getBoolean(false))
         {
-            noteState = subsystemsStates.holdingPiece;
+            // noteState = subsystemsStates.holdingPiece;
+            m_frontPickup.setVoltage(4);
         }
         //Remove entire else statement later
         else
         {
-            noteState = subsystemsStates.noPiece;
+            // noteState = subsystemsStates.noPiece;
+            m_frontPickup.setVoltage(0);
         }
 
         //The piece is loaded when ONLY the loadedPieceDectector sensor sees a piece and the loader is enabled
         if (loaderEnabled && !loadedPieceDetector.get() && secondaryPieceDetector.get())
         {
-           noteState=subsystemsStates.loadedPiece;
-           loaderMotor.set(TalonSRXControlMode.PercentOutput, 0);
+        //    noteState=subsystemsStates.loadedPiece;
+        //    loaderMotor.set(TalonSRXControlMode.PercentOutput, 0);
         }
 
 
         if (noteState==subsystemsStates.holdingPiece && pickupEnabled)
         {
-            retractPickup();
-            loadShooter();
+            //retractPickup();
+            //loadShooter();
         }
 
         if (Constants.ControllerConstants.kManipulator.getRawButtonPressed(Constants.ControllerConstants.kY))
         {
-            runPickup();
+            // runPickup();
         }
     }
 }
