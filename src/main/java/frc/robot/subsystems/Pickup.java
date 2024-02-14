@@ -75,7 +75,7 @@ public class Pickup extends SubsystemBase {
         tempHoldingPieceTF = PickupTab.add("Holding Piece Sensor", false);
 
         //Instanciates the pickup pneumatics and retracts the pickups into the frame
-        //IntakePneumatics = new DoubleSolenoid(Constants.kPneumaticsModule, PneumaticsModuleType.CTREPCM, 0, 0);
+        IntakePneumatics = new DoubleSolenoid(Constants.kPneumaticsModule, PneumaticsModuleType.CTREPCM, 0, 0);
         //IntakePneumatics.set(Value.kReverse);
 
         //Instanciates the load pneumatics and puts it in pickup mode
@@ -179,9 +179,5 @@ public class Pickup extends SubsystemBase {
             //loadShooter();
         }
 
-        if (Constants.ControllerConstants.kManipulator.getRawButtonPressed(Constants.ControllerConstants.kY))
-        {
-            // runPickup();
-        }
     }
 }
