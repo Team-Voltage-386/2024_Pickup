@@ -24,7 +24,9 @@ public final class Constants
   //Add in correct values
   public static final int kFrontPickupID = 14;
   public static final int kRearPickupID = 15;
-  public static final int kPieceDetector = 0;
+  public static final int kLoaderMotorID = 0;
+  public static final int kLoadedPieceDetectorChannel = 0;
+  public static final int kSecondaryPieceDetectorChannel = 0;
   public static final int kPneumaticsModule = 0;
   //
 
